@@ -4,757 +4,533 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIP Premium Member</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
         body {
-            background-color: #f4f6f9;
-            color: #1a1a1a;
-            padding: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
         }
-
-        .phone-container {
-            width: 100%;
-            max-width: 420px;
-            background: #ffffff;
-            border-radius: 36px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            position: relative;
-            padding-bottom: 30px;
-        }
-
-        /* Top Navigation Bar */
-        .top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 20px 10px 20px;
-        }
-
-        .brand-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 20px;
-            font-weight: 800;
-            color: #111;
-        }
-
-        .member-badge {
-            background: #fff3cd;
-            color: #856404;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .secure-badge {
-            background: #e6f9f0;
-            color: #0d9653;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Hero Card */
-        .hero-card {
-            margin: 16px 20px;
-            background: linear-gradient(135deg, #2b6cb0 0%, #4299e1 50%, #63b3ed 100%);
-            border-radius: 24px;
-            padding: 24px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 12px 25px rgba(66, 153, 225, 0.3);
-        }
-
-        .created-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(8px);
-            padding: 6px 16px;
-            border-radius: 20px;
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .avatar-container {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 16px auto;
-            border-radius: 50%;
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            border: 3px solid rgba(255, 255, 255, 0.8);
-            overflow: hidden;
-        }
-
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .edu-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #2b6cb0;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .live-members-box {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 14px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-        }
-
-        .live-label {
-            font-size: 13px;
-            font-weight: 700;
-            color: #4a5568;
-            letter-spacing: 0.5px;
-        }
-
-        .live-count-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: 800;
-            color: #1a202c;
-        }
-
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #38a169;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.7);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(56, 161, 105, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 161, 105, 0); }
-        }
-
-        /* Payment Gateway Marquee */
-        .payment-section {
-            background: #ffffff;
-            padding: 12px 0;
-            margin: 12px 20px;
-            border-radius: 16px;
-            border: 1px solid #edf2f7;
-            text-align: center;
-        }
-
-        .payment-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #718096;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .marquee {
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            width: 100%;
-        }
-
-        .marquee-track {
-            display: inline-flex;
-            gap: 16px;
-            animation: scroll 15s linear infinite;
-        }
-
+        /* Custom smooth marquee animation */
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
-        .pay-icon {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #2d3748;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Description Box */
-        .desc-box {
-            background: #ffffff;
-            margin: 12px 20px;
-            padding: 16px;
-            border-radius: 16px;
-            border: 1px solid #edf2f7;
-        }
-
-        .desc-title {
-            font-size: 13px;
-            font-weight: 800;
-            color: #718096;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .desc-content h3 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 6px;
-        }
-
-        .desc-content p {
-            font-size: 13px;
-            color: #4a5568;
-            line-height: 1.5;
-        }
-
-        .learn-more {
-            color: #3182ce;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Feature Badges Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 12px 20px;
-        }
-
-        .feature-chip {
-            background: #ffffff;
-            border: 1px solid #edf2f7;
-            padding: 12px;
-            border-radius: 14px;
+        .animate-marquee {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            width: max-content;
+            animation: scroll 25s linear infinite;
         }
-
-        .feature-chip i {
-            font-size: 16px;
-            color: #3182ce;
-            background: #ebf8ff;
-            padding: 10px;
-            border-radius: 10px;
+        .animate-marquee:hover {
+            animation-play-state: paused;
         }
-
-        .feature-text h4 {
-            font-size: 13px;
-            font-weight: 700;
-            color: #2d3748;
-        }
-
-        .feature-text p {
-            font-size: 11px;
-            color: #718096;
-        }
-
-        /* Pricing Cards */
-        .pricing-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 12px 20px;
-        }
-
-        .price-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 16px;
-            position: relative;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-
-        .price-card.popular {
-            border: 2px solid #ff5722;
-            background: linear-gradient(0deg, #fff9f6 0%, #ffffff 100%);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -10px;
-            right: 16px;
-            background: #ff5722;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .plan-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .plan-name {
-            font-size: 16px;
-            font-weight: 800;
-            color: #1a202c;
-        }
-
-        .plan-sub {
-            font-size: 12px;
-            color: #718096;
-            margin-top: 2px;
-        }
-
-        .plan-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price-tag {
-            font-size: 20px;
-            font-weight: 800;
-            color: #1a202c;
-        }
-
-        .price-tag span {
-            font-size: 12px;
-            font-weight: 600;
-            color: #718096;
-        }
-
-        .buy-btn {
-            background: #ff5722;
-            color: #ffffff;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
-            transition: transform 0.1s;
-        }
-
-        .buy-btn:active {
-            transform: scale(0.96);
-        }
-
-        .active-members-indicator {
-            font-size: 11px;
-            color: #38a169;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 4px;
-        }
-
-        /* Testimonials Section */
-        .testimonials-box {
-            background: #ffffff;
-            margin: 12px 20px;
-            padding: 16px;
-            border-radius: 16px;
-            border: 1px solid #edf2f7;
-            position: relative;
-        }
-
-        .testimonial-slide {
+        /* Hide scrollbar for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
-
-        .testimonial-slide.active {
-            display: block;
-        }
-
-        .stars {
-            color: #ecc94b;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
-
-        .testimonial-text {
-            font-size: 13px;
-            color: #2d3748;
-            font-style: italic;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .testimonial-author {
-            font-size: 12px;
-            font-weight: 700;
-            color: #4a5568;
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
-            border-top: 1px solid #edf2f7;
-            padding-top: 10px;
-        }
-
-        .dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: #cbd5e0;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .dot.active {
-            background: #3182ce;
-            width: 16px;
-            border-radius: 3px;
-        }
-
-        .carousel-btns button {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: #4a5568;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            font-size: 11px;
-            color: #a0aec0;
-            margin-top: 16px;
-        }
-
-        /* Modal Overlay */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: #fff;
-            padding: 24px;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 320px;
-            text-align: center;
-        }
-        .modal-content h3 { margin-bottom: 10px; color: #1a202c; }
-        .modal-content p { font-size: 13px; color: #4a5568; margin-bottom: 16px; }
-        .close-modal {
-            background: #3182ce; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-100 min-h-screen pb-24">
 
-    <div class="phone-container">
-        <!-- Top Navbar -->
-        <div class="top-nav">
-            <div class="brand-title">
-                VIP Premium <span class="member-badge">Member</span>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 px-4 py-3 shadow-sm">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-extrabold tracking-tight text-gray-900">VIP Premium</span>
+                <span class="text-xs bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded-full">Member</span>
             </div>
-            <div class="secure-badge">
-                <i class="fa-solid fa-lock"></i> 100% Secure
+            <div class="flex items-center space-x-1.5 bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-emerald-200">
+                <i class="fa-solid fa-lock text-[10px]"></i>
+                <span>100% Secure</span>
             </div>
         </div>
+    </header>
 
-        <!-- Hero Card with Bull Logo -->
-        <div class="hero-card">
-            <div class="created-pill">
-                <i class="fa-solid fa-circle-check" style="color: #48bb78;"></i> CREATED BY
-            </div>
-            <div class="avatar-container">
-                <img src="image_2.png" alt="Share Market Call Logo">
-            </div>
-            <div class="edu-badge">
-                <i class="fa-solid fa-graduation-cap"></i> Share Market Call
-            </div>
-            <div class="live-members-box">
-                <span class="live-label">LIVE MEMBERS</span>
-                <div class="live-count-wrapper">
-                    <span class="pulse-dot"></span>
-                    <span class="dynamic-counter" data-base="12104">12,104</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment Marquee -->
-        <div class="payment-section">
-            <div class="payment-title">Guaranteed safe and secure payment</div>
-            <div class="marquee">
-                <div class="marquee-track">
-                    <div class="pay-icon"><i class="fa-solid fa-bolt" style="color: #00baf2;"></i> Paytm</div>
-                    <div class="pay-icon"><i class="fa-solid fa-g" style="color: #4285f4;"></i> Google Pay</div>
-                    <div class="pay-icon"><i class="fa-solid fa-mobile-screen" style="color: #5f259f;"></i> UPI</div>
-                    <div class="pay-icon"><i class="fa-solid fa-m" style="color: #eb001b;"></i><i class="fa-solid fa-c" style="color: #f79e1b;"></i> MC</div>
-                    <div class="pay-icon"><i class="fa-solid fa-phone" style="color: #5f259f;"></i> PhonePe</div>
-                    <div class="pay-icon"><i class="fa-brands fa-cc-visa" style="color: #1a1f71;"></i> VISA</div>
-                    <div class="pay-icon"><i class="fa-solid fa-rupee-sign" style="color: #111;"></i> RuPay</div>
-                    <!-- Duplicate for infinite effect -->
-                    <div class="pay-icon"><i class="fa-solid fa-bolt" style="color: #00baf2;"></i> Paytm</div>
-                    <div class="pay-icon"><i class="fa-solid fa-g" style="color: #4285f4;"></i> Google Pay</div>
-                    <div class="pay-icon"><i class="fa-solid fa-mobile-screen" style="color: #5f259f;"></i> UPI</div>
-                    <div class="pay-icon"><i class="fa-solid fa-m" style="color: #eb001b;"></i><i class="fa-solid fa-c" style="color: #f79e1b;"></i> MC</div>
-                    <div class="pay-icon"><i class="fa-solid fa-phone" style="color: #5f259f;"></i> PhonePe</div>
-                    <div class="pay-icon"><i class="fa-brands fa-cc-visa" style="color: #1a1f71;"></i> VISA</div>
-                    <div class="pay-icon"><i class="fa-solid fa-rupee-sign" style="color: #111;"></i> RuPay</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Description Box -->
-        <div class="desc-box">
-            <div class="desc-title">Description</div>
-            <div class="desc-content">
-                <h3>Disclaimer</h3>
-                <p>Join our exclusive VIP premium membership to unlock premium features, expert insights, and high-value content designed to help you grow faster and smarter. <span class="learn-more" onclick="openModal()">Learn more</span></p>
-            </div>
-        </div>
-
-        <!-- Feature Badges -->
-        <div class="features-grid">
-            <div class="feature-chip">
-                <i class="fa-solid fa-chart-line"></i>
-                <div class="feature-text">
-                    <h4>Live Signals</h4>
-                    <p>Real-time alerts</p>
-                </div>
-            </div>
-            <div class="feature-chip">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <div class="feature-text">
-                    <h4>Education</h4>
-                    <p>Expert sessions</p>
-                </div>
-            </div>
-            <div class="feature-chip">
-                <i class="fa-solid fa-comments"></i>
-                <div class="feature-text">
-                    <h4>VIP Group</h4>
-                    <p>Private Telegram</p>
-                </div>
-            </div>
-            <div class="feature-chip">
-                <i class="fa-solid fa-shield-halved"></i>
-                <div class="feature-text">
-                    <h4>Secure Pay</h4>
-                    <p>256-bit SSL</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pricing Cards -->
-        <div class="pricing-container">
-            <!-- 1 Month -->
-            <div class="price-card">
-                <div class="plan-header">
-                    <div>
-                        <div class="plan-name">1 Month</div>
-                        <div class="plan-sub">Standard Access</div>
-                        <div class="active-members-indicator"><span class="pulse-dot" style="width: 6px; height: 6px;"></span> <span class="dynamic-counter" data-base="1302">1,302</span> members active</div>
-                    </div>
-                </div>
-                <div class="plan-footer">
-                    <div class="price-tag">₹2,499.00 <span>/ 1 Month</span></div>
-                    <button class="buy-btn" onclick="openModal()">Buy Now</button>
-                </div>
-            </div>
-
-            <!-- Half Year Plan -->
-            <div class="price-card">
-                <div class="plan-header">
-                    <div>
-                        <div class="plan-name">Half Year Plan</div>
-                        <div class="plan-sub">Extended Access</div>
-                        <div class="active-members-indicator"><span class="pulse-dot" style="width: 6px; height: 6px;"></span> <span class="dynamic-counter" data-base="4434">4,434</span> members active</div>
-                    </div>
-                </div>
-                <div class="plan-footer">
-                    <div class="price-tag">₹3,100.00 <span>/ 6 Months</span></div>
-                    <button class="buy-btn" onclick="openModal()">Buy Now</button>
-                </div>
-            </div>
-
-            <!-- Yearly Plan -->
-            <div class="price-card">
-                <div class="plan-header">
-                    <div>
-                        <div class="plan-name">Yearly Plan</div>
-                        <div class="plan-sub">Annual Access</div>
-                        <div class="active-members-indicator"><span class="pulse-dot" style="width: 6px; height: 6px;"></span> <span class="dynamic-counter" data-base="2116">2,116</span> members active</div>
-                    </div>
-                </div>
-                <div class="plan-footer">
-                    <div class="price-tag">₹3,499.00 <span>/ 12 Months</span></div>
-                    <button class="buy-btn" onclick="openModal()">Buy Now</button>
-                </div>
-            </div>
-
-            <!-- Life Time -->
-            <div class="price-card popular">
-                <div class="popular-badge">Most Popular</div>
-                <div class="plan-header">
-                    <div>
-                        <div class="plan-name">Life Time</div>
-                        <div class="plan-sub">Permanent VIP Status</div>
-                        <div class="active-members-indicator"><span class="pulse-dot" style="width: 6px; height: 6px;"></span> <span class="dynamic-counter" data-base="3335">3,335</span> members active</div>
-                    </div>
-                </div>
-                <div class="plan-footer">
-                    <div class="price-tag">₹3,999.00 <span>/ Life time</span></div>
-                    <button class="buy-btn" onclick="openModal()">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Testimonials -->
-        <div class="testimonials-box">
-            <div class="desc-title" style="margin-bottom: 12px;">What Members Say</div>
+    <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+        
+        <!-- Hero Card -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-blue-600 via-blue-500 to-indigo-600 text-white p-6 shadow-xl">
+            <!-- Background Decorative Glow -->
+            <div class="absolute -right-10 -top-10 w-48 h-48 bg-blue-400/30 rounded-full blur-2xl"></div>
             
-            <div class="testimonial-slide active">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <div class="testimonial-text">"Signals are incredibly accurate. Made ₹42,000 profit in my very first month! Best trading community I have ever joined."</div>
-                <div class="testimonial-author">— Ravi K., Mumbai</div>
+            <!-- Verified Header -->
+            <div class="flex items-center space-x-1.5 bg-white/10 backdrop-blur-md w-max px-3 py-1 rounded-full text-xs font-medium mb-6 border border-white/20">
+                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                <span class="tracking-wide">CREATED BY</span>
             </div>
 
-            <div class="testimonial-slide">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <div class="testimonial-text">"Education content is worth 10x the price. Went from a complete beginner to confidently trading in just 3 months!"</div>
-                <div class="testimonial-author">— Priya S., Delhi</div>
-            </div>
-
-            <div class="carousel-controls">
-                <div class="dots">
-                    <span class="dot active" onclick="currentSlide(0)"></span>
-                    <span class="dot" onclick="currentSlide(1)"></span>
+            <!-- Avatar & Education Pill -->
+            <div class="flex flex-col items-center justify-center my-4">
+                <div class="relative">
+                    <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-xl border-2 border-white/60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&auto=format&fit=crop&q=80" alt="Share Market Call" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/200x200/10b981/ffffff?text=LOGO';">
+                    </div>
                 </div>
-                <div class="carousel-btns">
-                    <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="mt-3 bg-white/15 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-semibold flex items-center space-x-1.5 border border-white/20 shadow-sm">
+                    <i class="fa-solid fa-graduation-cap text-yellow-300"></i>
+                    <span>Education</span>
+                </div>
+            </div>
+
+            <!-- Live Members Counter Pill -->
+            <div class="mt-6 bg-white/95 text-gray-900 rounded-2xl p-3 shadow-lg flex items-center justify-between border border-white/50">
+                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Live Members</div>
+                <div class="flex items-center space-x-2">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <span id="live-members-count" class="text-lg font-extrabold tracking-tight text-gray-900">12,110</span>
                 </div>
             </div>
         </div>
 
-        <div class="footer">
-            © 2026 vip premium membership. All rights reserved.
+        <!-- Payment Marquee Section -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+            <div class="text-center text-xs font-semibold text-gray-500 mb-3 tracking-wide">
+                Guaranteed safe and secure payment
+            </div>
+            <div class="overflow-hidden relative w-full py-1">
+                <div class="animate-marquee flex items-center space-x-6">
+                    <!-- Payment Badges Group 1 -->
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-black text-blue-600 text-sm">Paytm</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-bold text-gray-800 text-sm">GPay</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-extrabold text-indigo-700 text-sm">UPI</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-bold text-orange-600 text-sm"><i class="fa-solid fa-circle-dot"></i> MC</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-extrabold text-purple-700 text-sm">PhonePe</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-black text-blue-800 text-sm">VISA</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-bold text-emerald-700 text-sm">RuPay</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-semibold text-gray-700 text-sm"><i class="fa-solid fa-building-columns mr-1 text-blue-600"></i> Net Banking</span>
+                    </div>
+                    
+                    <!-- Duplicate for infinite smooth marquee effect -->
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-black text-blue-600 text-sm">Paytm</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-bold text-gray-800 text-sm">GPay</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-extrabold text-indigo-700 text-sm">UPI</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-bold text-orange-600 text-sm"><i class="fa-solid fa-circle-dot"></i> MC</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-extrabold text-purple-700 text-sm">PhonePe</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-black text-blue-800 text-sm">VISA</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-bold text-emerald-700 text-sm">RuPay</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg shadow-2xs">
+                        <span class="font-semibold text-gray-700 text-sm"><i class="fa-solid fa-building-columns mr-1 text-blue-600"></i> Net Banking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description Card -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 space-y-3">
+            <h2 class="text-xs font-bold text-gray-400 tracking-wider uppercase">Description</h2>
+            <div class="space-y-1.5">
+                <h3 class="text-base font-bold text-gray-900">Disclaimer</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    Join our exclusive VIP premium membership to unlock premium features, expert insights, and high-value content designed to help you grow faster and smarter. 
+                    <button onclick="openModal('Disclaimer Details', 'This channel provides expert analysis and educational insights for trading and financial education. Past performance is not indicative of future results. Please trade responsibly.')" class="text-blue-600 font-semibold hover:underline inline-block mt-0.5">Learn more</button>
+                </p>
+            </div>
+        </div>
+
+        <!-- Trust Badges Grid -->
+        <div class="grid grid-cols-2 gap-2.5">
+            <div class="bg-white border border-gray-100 p-3.5 rounded-xl flex items-center space-x-3 shadow-2xs">
+                <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-900">256-bit SSL</h4>
+                    <p class="text-[10px] text-gray-500">Secure encryption</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-3.5 rounded-xl flex items-center space-x-3 shadow-2xs">
+                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-900">Instant Access</h4>
+                    <p class="text-[10px] text-gray-500">Automated entry</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-3.5 rounded-xl flex items-center space-x-3 shadow-2xs">
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-900">Verified Creator</h4>
+                    <p class="text-[10px] text-gray-500">Trusted expert</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-3.5 rounded-xl flex items-center space-x-3 shadow-2xs">
+                <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-sm">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold text-gray-900">24/7 Support</h4>
+                    <p class="text-[10px] text-gray-500">Dedicated help</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Plans Section -->
+        <div class="space-y-3.5 pt-2">
+            
+            <!-- Plan 1: 1 Month -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 relative transition hover:shadow-md">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-sm font-bold text-gray-500">1 Month</span>
+                        <div class="text-2xl font-black text-gray-900 mt-0.5">₹2,499.00 <span class="text-xs font-normal text-gray-500">/ 1 Month</span></div>
+                    </div>
+                    <button onclick="selectPlan('1 Month Plan', 2499)" class="bg-[#ff5722] hover:bg-[#f4511e] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition active:scale-95">
+                        Buy Now
+                    </button>
+                </div>
+                <div class="flex items-center space-x-1.5 text-xs text-emerald-600 font-medium pt-2 border-t border-gray-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="member-counter" data-base="1302">1,302 members active</span>
+                </div>
+            </div>
+
+            <!-- Plan 2: Half Year Plan -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 relative transition hover:shadow-md">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-sm font-bold text-gray-500">Half Year Plan</span>
+                        <div class="text-2xl font-black text-gray-900 mt-0.5">₹3,100.00 <span class="text-xs font-normal text-gray-500">/ 6 Months</span></div>
+                    </div>
+                    <button onclick="selectPlan('Half Year Plan', 3100)" class="bg-[#ff5722] hover:bg-[#f4511e] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition active:scale-95">
+                        Buy Now
+                    </button>
+                </div>
+                <div class="flex items-center space-x-1.5 text-xs text-emerald-600 font-medium pt-2 border-t border-gray-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="member-counter" data-base="4436">4,436 members active</span>
+                </div>
+            </div>
+
+            <!-- Plan 3: Yearly Plan -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 relative transition hover:shadow-md">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-sm font-bold text-gray-500">Yearly Plan</span>
+                        <div class="text-2xl font-black text-gray-900 mt-0.5">₹3,499.00 <span class="text-xs font-normal text-gray-500">/ 12 Months</span></div>
+                    </div>
+                    <button onclick="selectPlan('Yearly Plan', 3499)" class="bg-[#ff5722] hover:bg-[#f4511e] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition active:scale-95">
+                        Buy Now
+                    </button>
+                </div>
+                <div class="flex items-center space-x-1.5 text-xs text-emerald-600 font-medium pt-2 border-t border-gray-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="member-counter" data-base="2118">2,118 members active</span>
+                </div>
+            </div>
+
+            <!-- Plan 4: Life Time (Most Popular) -->
+            <div class="bg-white rounded-2xl p-5 shadow-md border-2 border-amber-400 relative transition hover:shadow-lg">
+                <!-- Most Popular Tag -->
+                <div class="absolute -top-3.5 right-4 bg-amber-400 text-amber-950 font-extrabold text-[11px] px-3 py-1 rounded-full shadow-sm flex items-center space-x-1 uppercase tracking-wider">
+                    <i class="fa-solid fa-star text-[10px]"></i>
+                    <span>Most Popular</span>
+                </div>
+
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <span class="text-sm font-bold text-amber-600">Life Time</span>
+                        <div class="text-2xl font-black text-gray-900 mt-0.5">₹3,999.00 <span class="text-xs font-normal text-gray-500">/ Life time</span></div>
+                    </div>
+                    <button onclick="selectPlan('Lifetime VIP Plan', 3999)" class="bg-[#ff5722] hover:bg-[#f4511e] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition active:scale-95">
+                        Buy Now
+                    </button>
+                </div>
+                <div class="flex items-center space-x-1.5 text-xs text-emerald-600 font-medium pt-2 border-t border-gray-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="member-counter" data-base="3335">3,335 members active</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Feature Grid Section -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center shadow-2xs flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-lg mb-2 shadow-2xs">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h4 class="text-xs font-bold text-gray-900">Live Signals</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Real-time alerts</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center shadow-2xs flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg mb-2 shadow-2xs">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h4 class="text-xs font-bold text-gray-900">Education</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Expert sessions</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center shadow-2xs flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-lg mb-2 shadow-2xs">
+                    <i class="fa-brands fa-telegram"></i>
+                </div>
+                <h4 class="text-xs font-bold text-gray-900">VIP Group</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">Private Telegram</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-gray-100 text-center shadow-2xs flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg mb-2 shadow-2xs">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h4 class="text-xs font-bold text-gray-900">Secure Pay</h4>
+                <p class="text-[11px] text-gray-500 mt-0.5">256-bit SSL</p>
+            </div>
+        </div>
+
+        <!-- Testimonials Section ("What Members Say") -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 space-y-4 pt-4">
+            <h3 class="text-base font-bold text-gray-900">What Members Say</h3>
+            
+            <!-- Carousel Container -->
+            <div class="relative overflow-hidden">
+                <div id="testimonial-slider" class="flex transition-transform duration-300 ease-in-out">
+                    
+                    <!-- Testimonial 1 -->
+                    <div class="w-full shrink-0 space-y-3">
+                        <div class="flex text-amber-400 space-x-1 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm italic text-gray-700 leading-relaxed">
+                            "Signals are incredibly accurate. Made ₹42,000 profit in my very first month! Best trading community I have ever joined."
+                        </p>
+                        <div class="text-xs font-bold text-blue-600">— Ravi K., Mumbai</div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="w-full shrink-0 space-y-3">
+                        <div class="flex text-amber-400 space-x-1 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm italic text-gray-700 leading-relaxed">
+                            "Education content is worth 10x the price. Went from a complete beginner to confidently trading in just 3 months!"
+                        </p>
+                        <div class="text-xs font-bold text-blue-600">— Priya S., Delhi</div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="w-full shrink-0 space-y-3">
+                        <div class="flex text-amber-400 space-x-1 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm italic text-gray-700 leading-relaxed">
+                            "Always responsive in the VIP group. Live weekend sessions are extremely valuable. Everyone should join this community!"
+                        </p>
+                        <div class="text-xs font-bold text-blue-600">— Aakash T., Pune</div>
+                    </div>
+
+                </div>
+
+                <!-- Controls & Dots -->
+                <div class="flex items-center justify-between pt-4 mt-2 border-t border-gray-100">
+                    <!-- Dots -->
+                    <div class="flex space-x-1.5" id="testimonial-dots">
+                        <button onclick="setTestimonial(0)" class="w-2 h-2 rounded-full bg-blue-600 transition-all"></button>
+                        <button onclick="setTestimonial(1)" class="w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+                        <button onclick="setTestimonial(2)" class="w-2 h-2 rounded-full bg-gray-300 transition-all"></button>
+                    </div>
+
+                    <!-- Arrows -->
+                    <div class="flex space-x-2">
+                        <button onclick="prevTestimonial()" class="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 active:scale-95">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button onclick="nextTestimonial()" class="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 active:scale-95">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-gray-500 py-6 space-y-1">
+            <p>© 2026 vip premium membership. All rights reserved.</p>
+            <p>Join, learn, and grow with our exclusive VIP network.</p>
+        </footer>
+
+    </main>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-amber-400 border-t border-amber-500 text-amber-950 font-semibold py-2.5 px-4 shadow-lg overflow-hidden">
+        <div class="animate-marquee whitespace-nowrap text-xs flex items-center space-x-8">
+            <span><i class="fa-solid fa-triangle-exclamation mr-1"></i> premiummembershipcalls43x.netlify.app <span class="font-bold underline ml-1">MOST SECURE VIP</span></span>
+            <span><i class="fa-solid fa-triangle-exclamation mr-1"></i> premiummembershipcalls43x.netlify.app <span class="font-bold underline ml-1">MOST SECURE VIP</span></span>
         </div>
     </div>
 
-    <!-- Modal Popup -->
-    <div class="modal" id="infoModal">
-        <div class="modal-content">
-            <h3>Secure Checkout</h3>
-            <p>Select your payment method on the next secure page to instantly unlock VIP membership access.</p>
-            <button class="close-modal" onclick="closeModal()">Close</button>
+    <!-- Checkout / Message Modal -->
+    <div id="custom-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl transform transition-all">
+            <div class="flex justify-between items-center">
+                <h3 id="modal-title" class="text-lg font-extrabold text-gray-900">Secure Checkout</h3>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="text-sm text-gray-600 space-y-2">
+                <!-- Dynamic content -->
+            </div>
+            <div class="pt-2">
+                <button onclick="proceedToPayment()" class="w-full bg-[#ff5722] hover:bg-[#f4511e] text-white font-bold py-3 rounded-2xl shadow-lg transition active:scale-95 text-center block">
+                    Proceed to Secure Payment
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- JavaScript for Dynamic Live Counters & Carousel -->
+    <!-- JavaScript Logic -->
     <script>
-        // Live Counter Incrementer every 2 seconds
+        // Live counter fluctuation script (Updates every 2 seconds across all counters)
+        let baseLiveMembers = 12110;
+        let planCounts = [1302, 4436, 2118, 3335];
+
         setInterval(() => {
-            const counters = document.querySelectorAll('.dynamic-counter');
-            counters.forEach(counter => {
-                let currentVal = parseInt(counter.getAttribute('data-base'));
-                // Randomly add 1 to 3 members every 2 seconds
-                let increment = Math.floor(Math.random() * 3) + 1;
-                currentVal += increment;
-                counter.setAttribute('data-base', currentVal);
-                counter.textContent = currentVal.toLocaleString();
+            const fluctuation = Math.floor(Math.random() * 3) + 1; // +1, +2 or +3
+            baseLiveMembers += fluctuation;
+            const liveEl = document.getElementById('live-members-count');
+            if (liveEl) {
+                liveEl.textContent = baseLiveMembers.toLocaleString();
+            }
+
+            // Update all plan counters
+            const counterEls = document.querySelectorAll('.member-counter');
+            counterEls.forEach((el, index) => {
+                let currentVal = parseInt(el.getAttribute('data-base')) + Math.floor(Math.random() * 3) + 1;
+                el.setAttribute('data-base', currentVal);
+                el.textContent = currentVal.toLocaleString() + ' members active';
             });
         }, 2000);
 
-        // Testimonial Carousel Script
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.testimonial-slide');
-        const dots = document.querySelectorAll('.dot');
+        // Testimonial Carousel state
+        let currentTestimonial = 0;
+        const totalTestimonials = 3;
 
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            slideIndex = (n + slides.length) % slides.length;
-            slides[slideIndex].classList.add('active');
-            dots[slideIndex].classList.add('active');
+        function setTestimonial(index) {
+            currentTestimonial = index;
+            updateTestimonialSlider();
         }
 
-        function nextSlide() { showSlide(slideIndex + 1); }
-        function prevSlide() { showSlide(slideIndex - 1); }
-        function currentSlide(n) { showSlide(n); }
-
-        // Auto slide every 4 seconds
-        setInterval(() => { nextSlide(); }, 4000);
-
-        // Modal triggers
-        function openModal() {
-            document.getElementById('infoModal').style.display = 'flex';
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            updateTestimonialSlider();
         }
+
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            updateTestimonialSlider();
+        }
+
+        function updateTestimonialSlider() {
+            const slider = document.getElementById('testimonial-slider');
+            if (slider) {
+                slider.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            }
+            // Update dots
+            const dots = document.getElementById('testimonial-dots').children;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === currentTestimonial) {
+                    dots[i].className = "w-6 h-2 rounded-full bg-blue-600 transition-all";
+                } else {
+                    dots[i].className = "w-2 h-2 rounded-full bg-gray-300 transition-all";
+                }
+            }
+        }
+
+        // Auto slide testimonials every 6 seconds
+        setInterval(nextTestimonial, 6000);
+
+        // Modal Functions (Replacing alert/confirm)
+        function openModal(title, message) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-content').innerHTML = `<p>${message}</p>`;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function selectPlan(planName, price) {
+            document.getElementById('modal-title').textContent = planName;
+            document.getElementById('modal-content').innerHTML = `
+                <div class="bg-blue-50 border border-blue-100 p-4 rounded-xl space-y-2">
+                    <div class="flex justify-between text-sm"><span class="text-gray-600">Selected Plan:</span><span class="font-bold text-gray-900">${planName}</span></div>
+                    <div class="flex justify-between text-sm"><span class="text-gray-600">Total Amount:</span><span class="font-black text-blue-600">₹${price.toLocaleString()}</span></div>
+                    <div class="flex justify-between text-sm"><span class="text-gray-600">Access:</span><span class="font-semibold text-emerald-600">Instant Telegram Link</span></div>
+                </div>
+                <p class="text-xs text-gray-500 pt-1">Clicking proceed will open our secure payment gateway (UPI / Cards / GPay / NetBanking).</p>
+            `;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
         function closeModal() {
-            document.getElementById('infoModal').style.display = 'none';
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        function proceedToPayment() {
+            closeModal();
+            // Custom friendly notification popup instead of alert()
+            const notif = document.createElement('div');
+            notif.className = 'fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-2xl shadow-2xl z-50 text-sm font-semibold flex items-center space-x-2 animate-bounce';
+            notif.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i><span>Redirecting to secure gateway...</span>`;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3500);
         }
     </script>
 </body>
